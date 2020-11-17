@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
+const joi = require("joi");
 
 function validateCustomer(reqBody) {
   const genreSchema = {
-    isGold: Joi.boolean().required(),
-    name: Joi.string().min(3).required(),
-    phone: Joi.string().min(5).max(12).required(),
+    isGold: joi.boolean().required(),
+    name: joi.string().min(3).required(),
+    phone: joi.string().min(5).max(12).required(),
   };
 
-  return Joi.validate(reqBody, genreSchema);
+  return joi.validate(reqBody, genreSchema);
 }
 
 const customerSchema = new mongoose.Schema({

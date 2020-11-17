@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
+const joi = require("joi");
 
 function validateGenre(genre) {
   const schema = {
-    name: Joi.string().min(3).required(),
+    name: joi.string().min(3).required(),
   };
 
-  return Joi.validate(genre, schema);
+  return joi.validate(genre, schema);
 }
 
 const genreSchema = new mongoose.Schema({
