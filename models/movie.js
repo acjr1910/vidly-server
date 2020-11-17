@@ -43,5 +43,6 @@ const Movie = new mongoose.model("movie", movieSchema);
 
 module.exports = {
   Movie,
+  movieSchema,
   validate: validateMovie,
 };
