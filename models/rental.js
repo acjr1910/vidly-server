@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
-joi.objectId = require("joi-objectid")(joi);
 
 const rentalSchema = new mongoose.Schema({
   customer: {
