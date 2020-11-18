@@ -28,7 +28,6 @@ mongoose
   .catch((error) => console.log('Could not connect to MongoDB', error))
 
 app.use(express.json())
-
 app.use('/api/genres', genres)
 app.use('/api/customers', customers)
 app.use('/api/movies', movies)
