@@ -2,16 +2,14 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const auth = require('../middleware/auth')
+const admin = require('../middleware/admin')
 
 const { Genre, validate } = require('../models/genre')
 
-async function getGenres() {
-  const genres = await Genre.find().sort('name')
-  return genres
-}
-
 router.get('/', async (req, res) => {
-  res.send(await getGenres())
+  throw new Error('Could not get the genres.')
+
+  res.send(await Genre.find().sort('name'))
 })
 
 async function createGenre(name) {
@@ -64,7 +62,7 @@ router.put('/:id', auth, async (req, res) => {
   const { id } = req.params
   const { name } = req.body
 
-  const genres = await getGenres()
+  const genres = await Genre.find().sort('name')
 
   const genre = genres.find((g) => g._id == id)
 
@@ -84,7 +82,7 @@ async function removeGenre(id) {
   console.log(result)
 }
 
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
   const { id } = req.params
   if (!id) return res.status(404).send('No ID was given.')
 
