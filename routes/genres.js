@@ -7,8 +7,6 @@ const admin = require('../middleware/admin')
 const { Genre, validate } = require('../models/genre')
 
 router.get('/', async (req, res) => {
-  throw new Error('Could not get the genres.')
-
   res.send(await Genre.find().sort('name'))
 })
 
@@ -89,7 +87,10 @@ router.delete('/:id', [auth, admin], async (req, res) => {
   res.send(await removeGenre(id))
 })
 
-async function getGenre(id) {
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  if (!id) return res.status(404).send('No ID was given.')
+
   const genre = await Genre.findOne({
     _id: id,
   })
@@ -97,14 +98,7 @@ async function getGenre(id) {
   if (!genre)
     return res.status(404).send('The genre with the given ID was not found.')
 
-  return genre
-}
-
-router.get('/:id', async (req, res) => {
-  const { id } = req.params
-  if (!id) return res.status(404).send('No ID was given.')
-
-  res.send(await getGenre(id))
+  res.send(genre)
 })
 
 module.exports = router
