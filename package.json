@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "dev": "export vidly_jwtPrivateKey=true &&  nodemon index.js"
+    "test": "jest --watchAll --verbose",
+    "dev": "export vidly_jwtPrivateKey=true && nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +34,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "jest": "^26.6.3",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "supertest": "^6.0.1"
   }
 }
