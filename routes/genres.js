@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const auth = require('../middleware/auth')
 const admin = require('../middleware/admin')
+const validateObjectId = require('../middleware/validateObjectId')
 
 const { Genre, validate } = require('../models/genre')
 
@@ -10,7 +11,12 @@ router.get('/', async (req, res) => {
   res.send(await Genre.find().sort('name'))
 })
 
-async function createGenre(name) {
+router.post('/', auth, async (req, res) => {
+  const { error } = validate(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
+
+  const name = req.body.name
+
   const genre = new Genre({
     _id: new mongoose.mongo.ObjectId(),
     name,
@@ -18,28 +24,12 @@ async function createGenre(name) {
 
   try {
     const result = await genre.save()
-    console.log('Created new genre:', result)
+    res.send(result)
   } catch (ex) {
     for (field in ex.errors) {
-      console.log('error:', ex.errors[field].message)
+      res.send(ex.errors[field].message)
     }
   }
-}
-
-router.post('/', auth, (req, res) => {
-  const { error } = validate(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
-
-  const name = req.body.name
-
-  const genre = {
-    id: genres.length + 1,
-    name,
-  }
-
-  genres.push(genre)
-  createGenre(name)
-  res.send(genre)
 })
 
 async function updateGenreName(id, name) {
@@ -87,8 +77,9 @@ router.delete('/:id', [auth, admin], async (req, res) => {
   res.send(await removeGenre(id))
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', validateObjectId, async (req, res) => {
   const { id } = req.params
+
   if (!id) return res.status(404).send('No ID was given.')
 
   const genre = await Genre.findOne({

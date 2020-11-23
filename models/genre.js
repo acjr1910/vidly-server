@@ -3,7 +3,7 @@ const joi = require('joi')
 
 function validateGenre(genre) {
   const schema = {
-    name: joi.string().min(3).required(),
+    name: joi.string().min(5).max(50).required(),
   }
 
   return joi.validate(genre, schema)
