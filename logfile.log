@@ -235,3 +235,8 @@
 {"message":"DB mongodb://localhost/vidly_test connected","level":"info"}
 {"message":"Listening on port 3000...","level":"info"}
 {"message":"DB mongodb://localhost/vidly_test connected","level":"info"}
+{"message":"Listening on port 3000...","level":"info"}
+{"message":"Listening on port 3000...","level":"info"}
+{"message":"DB mongodb://localhost/vidly_test connected","level":"info"}
+{"message":"Listening on port 3000...","level":"info"}
+{"message":"DB mongodb://localhost/vidly_test connected","level":"info"}

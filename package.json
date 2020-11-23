@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "test": "jest --watchAll --verbose --detectOpenHandles --coverage",
     "dev": "export vidly_jwtPrivateKey=true && nodemon index.js"
   },
   "keywords": [],
