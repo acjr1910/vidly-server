@@ -10,5 +10,5 @@ module.exports = async function () {
       useNewUrlParser: true,
       useCreateIndex: true,
     })
-    .then(() => winston.info(`DB ${db} connected`))
+    .then(() => winston.info(`Connected to DB: ${db} ...`))
 }
