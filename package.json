@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --verbose --detectOpenHandles --coverage",
-    "dev": "export vidly_jwtPrivateKey=true && nodemon index.js"
+    "dev": "export vidly_jwtPrivateKey=true && nodemon index.js",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "10.21.0"
   },
   "keywords": [],
   "author": "",
